@@ -26,7 +26,10 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("theme", darkMode ? "dark" : "light");
+    localStorage.setItem(
+      "theme",
+      darkMode ? "dark" : "light"
+    );
   }, [darkMode]);
 
   useEffect(() => {
@@ -37,7 +40,9 @@ export default function Home() {
         });
 
         if (!response.ok) {
-          throw new Error("Nem sikerült betölteni a híreket.");
+          throw new Error(
+            "Nem sikerült betölteni a híreket."
+          );
         }
 
         const data = await response.json();
@@ -46,7 +51,10 @@ export default function Home() {
           setNews(data);
         }
       } catch (error) {
-        console.error("Hírek betöltési hiba:", error);
+        console.error(
+          "Hírek betöltési hiba:",
+          error
+        );
       } finally {
         setLoadingNews(false);
       }
@@ -64,19 +72,38 @@ export default function Home() {
   }
 
   return (
-    <main className={darkMode ? "dark-mode" : ""}>
-      <header className="navbar">
-        <Link href="/" className="brand">
-          <div className="brand-mark">KP</div>
+    <main
+      className={
+        darkMode
+          ? "dark-mode"
+          : ""
+      }
+    >
+      <div className="site-disclaimer">
+        Ez az oldal egy Roblox-játékhoz készült, nem hivatalos weboldal.
+      </div>
 
+      <header className="navbar">
+        <Link
+          href="/"
+          className="brand"
+        >
           <div className="brand-text">
-            <strong>KIKÉPZÉSI</strong>
-            <span>PARANCSNOKSÁG</span>
+            <strong>
+              KIKÉPZÉSI
+            </strong>
+
+            <span>
+              PARANCSNOKSÁG
+            </span>
           </div>
         </Link>
 
         <nav className="navigation">
-          <Link href="/" className="active">
+          <Link
+            href="/"
+            className="active"
+          >
             Kezdőlap
           </Link>
 
@@ -89,17 +116,18 @@ export default function Home() {
           <button
             className="theme-button"
             aria-label="Téma váltása"
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={() =>
+              setDarkMode(!darkMode)
+            }
           >
-            {darkMode ? "☀" : "☾"}
+            {darkMode
+              ? "☀"
+              : "☾"}
           </button>
         </div>
       </header>
 
-      {/* =========================
-          HERO
-      ========================= */}
-
+      {/* HERO */}
       <section className="hero">
         <div className="hero-grid" />
 
@@ -112,14 +140,12 @@ export default function Home() {
         <div className="blue-orb orb-two" />
 
         <div className="hero-content">
-          <div className="eyebrow">
-            MAGYAR HONVÉDSÉG
-          </div>
-
           <h1>
             Kiképzési
             <br />
-            <span>Parancsnokság</span>
+            <span>
+              Parancsnokság
+            </span>
           </h1>
 
           <p>
@@ -128,22 +154,25 @@ export default function Home() {
           </p>
 
           <div className="hero-actions">
-            <Link href="/allomany" className="hero-button">
+            <Link
+              href="/allomany"
+              className="hero-button"
+            >
               Állomány megtekintése
               <span>→</span>
             </Link>
 
-            <a href="#hirek" className="secondary-button">
+            <a
+              href="#hirek"
+              className="secondary-button"
+            >
               Legfrissebb hírek
             </a>
           </div>
         </div>
       </section>
 
-      {/* =========================
-          INFORMÁCIÓ
-      ========================= */}
-
+      {/* INFORMÁCIÓ */}
       <section className="intro-section section">
         <div>
           <div className="section-label">
@@ -157,11 +186,12 @@ export default function Home() {
 
         <div className="intro-side">
           <p className="intro-text">
-            A Kiképzési Parancsnokság a Magyar Honvédség (MH) agya és szíve, ami
-            a teljes személyi állomány kiképzését és fejlesztését szervezi. Ők
-            felelnek a kiképzési stratégiákért, az újoncok alapkiképzésétől a
-            speciális továbbképzésekig mindenért. Céljuk, hogy a Honvédség mindig
-            felkészült és ütőképes legyen kihívásokkal szemben.
+            A Kiképzési Parancsnokság a teljes személyi állomány
+            kiképzését és fejlesztését szervezi. Ők felelnek a
+            kiképzési stratégiákért, az újoncok alapkiképzésétől a
+            speciális továbbképzésekig mindenért. Céljuk, hogy az
+            állomány mindig felkészült és ütőképes legyen
+            a kihívásokkal szemben.
           </p>
 
           <div className="mini-line">
@@ -182,11 +212,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* =========================
-          NEWS
-      ========================= */}
-
-      <section id="hirek" className="news-section section">
+      {/* NEWS */}
+      <section
+        id="hirek"
+        className="news-section section"
+      >
         <div className="section-heading">
           <div>
             <div className="section-label">
@@ -221,57 +251,60 @@ export default function Home() {
           </div>
         ) : (
           <div className="news-grid">
-            {news.map((article, index) => (
-              <article
-                className="news-card"
-                key={article.id}
-              >
-                {article.image && (
-                  <div className="news-image-wrapper">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="news-image"
-                    />
+            {news.map(
+              (article, index) => (
+                <article
+                  className="news-card"
+                  key={article.id}
+                >
+                  {article.image && (
+                    <div className="news-image-wrapper">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="news-image"
+                      />
+                    </div>
+                  )}
+
+                  <div className="news-card-top">
+                    <span className="news-index">
+                      {String(
+                        index + 1
+                      ).padStart(2, "0")}
+                    </span>
+
+                    <span className="news-date">
+                      {formatDate(
+                        article.createdAt
+                      )}
+                    </span>
                   </div>
-                )}
 
-                <div className="news-card-top">
-                  <span className="news-index">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
+                  <div>
+                    <h3>
+                      {article.title}
+                    </h3>
 
-                  <span className="news-date">
-                    {formatDate(article.createdAt)}
-                  </span>
-                </div>
-
-                <div>
-                  <h3>
-                    {article.title}
-                  </h3>
-
-                  <p>
-                    {article.description}
-                  </p>
-                </div>
-              </article>
-            ))}
+                    <p>
+                      {article.description}
+                    </p>
+                  </div>
+                </article>
+              )
+            )}
           </div>
         )}
       </section>
 
-      {/* =========================
-          FOOTER
-      ========================= */}
-
+      {/* FOOTER */}
       <footer>
         <strong>
-          MAGYAR HONVÉDSÉG
+          KIKÉPZÉSI PARANCSNOKSÁG
         </strong>
 
         <span>
-          Kiképzési Parancsnokság
+          Információs és állományi felület
         </span>
       </footer>
     </main>

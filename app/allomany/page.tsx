@@ -35,9 +35,12 @@ export default function Allomany() {
   useEffect(() => {
     async function loadMembers() {
       try {
-        const response = await fetch("/api/allomany", {
-          cache: "no-store",
-        });
+        const response = await fetch(
+          "/api/allomany",
+          {
+            cache: "no-store",
+          }
+        );
 
         if (!response.ok) {
           throw new Error(
@@ -71,19 +74,25 @@ export default function Allomany() {
           : "allomany-page"
       }
     >
-      {/* =========================
-          NAVBAR
-      ========================= */}
+      {/* DISCLAIMER */}
+      <div className="site-disclaimer">
+        Ez az oldal egy Roblox-játékhoz készült, nem hivatalos weboldal.
+      </div>
 
+      {/* NAVBAR */}
       <header className="navbar">
-        <Link href="/" className="brand">
-          <div className="brand-mark">
-            KP
-          </div>
-
+        <Link
+          href="/"
+          className="brand"
+        >
           <div className="brand-text">
-            <strong>KIKÉPZÉSI</strong>
-            <span>PARANCSNOKSÁG</span>
+            <strong>
+              KIKÉPZÉSI
+            </strong>
+
+            <span>
+              PARANCSNOKSÁG
+            </span>
           </div>
         </Link>
 
@@ -108,15 +117,14 @@ export default function Allomany() {
               setDarkMode(!darkMode)
             }
           >
-            {darkMode ? "☀" : "☾"}
+            {darkMode
+              ? "☀"
+              : "☾"}
           </button>
         </div>
       </header>
 
-      {/* =========================
-          HERO
-      ========================= */}
-
+      {/* HERO */}
       <section className="hero allomany-hero">
         <div className="hero-grid" />
 
@@ -129,25 +137,17 @@ export default function Allomany() {
         <div className="blue-orb orb-two" />
 
         <div className="hero-content">
-          <div className="eyebrow">
-            MAGYAR HONVÉDSÉG
-          </div>
-
           <h1>
             Állomány
           </h1>
 
           <p>
-            A Kiképzési Parancsnokság jelenlegi személyi
-            állományának nyilvántartása.
+            A Kiképzési Parancsnokság állománya
           </p>
         </div>
       </section>
 
-      {/* =========================
-          ÁLLOMÁNY
-      ========================= */}
-
+      {/* ÁLLOMÁNY */}
       <section className="section allomany-section">
         <div className="section-heading">
           <div>
@@ -156,7 +156,7 @@ export default function Allomany() {
             </div>
 
             <h2>
-              Állományi tagok
+              Állomány tagjai
             </h2>
           </div>
 
@@ -183,110 +183,74 @@ export default function Allomany() {
           </div>
         ) : (
           <div className="members-grid">
-            {members.map((member) => (
-              <article
-                className="member-card"
-                key={member.userId}
-              >
-                {member.image && (
-                  <div className="member-image-wrapper">
-                    <img
-                      src={member.image}
-                      alt={`${member.username} Roblox karaktere`}
-                      className="member-image"
-                    />
-                  </div>
-                )}
+            {members.map(
+              (member) => (
+                <article
+                  className="member-card"
+                  key={member.userId}
+                >
+                  {member.image && (
+                    <div className="member-image-wrapper">
+                      <img
+                        src={member.image}
+                        alt={`${member.username} Roblox karaktere`}
+                        className="member-image"
+                      />
+                    </div>
+                  )}
 
-                <div className="member-card-top">
-                  <div className="member-status-area">
-                    <span className="member-role-badge">
-                      {member.role}
-                    </span>
-
-                    <span className="member-status">
-                      AKTÍV
-                    </span>
-                  </div>
-                </div>
-
-                <div className="member-information">
-                  <h3>
-                    {member.username}
-                  </h3>
-
-                  {member.displayName &&
-                    member.displayName !== member.username && (
-                      <span className="member-display-name">
-                        {member.displayName}
+                  <div className="member-card-top">
+                    <div className="member-status-area">
+                      <span className="member-role-badge">
+                        {member.role}
                       </span>
-                    )}
 
-                  <div className="member-user-id">
-                    USER ID&nbsp;&nbsp;
-                    <strong>
-                      {member.userId}
-                    </strong>
+                      <span className="member-status">
+                        AKTÍV
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <div className="member-orbit">
-                  <div className="member-orbit-track" />
-                  <div className="member-orbit-dot" />
-                </div>
-              </article>
-            ))}
+                  <div className="member-information">
+                    <h3>
+                      {member.username}
+                    </h3>
+
+                    {member.displayName &&
+                      member.displayName !==
+                        member.username && (
+                        <span className="member-display-name">
+                          {member.displayName}
+                        </span>
+                      )}
+
+                    <div className="member-user-id">
+                      USER ID&nbsp;&nbsp;
+                      <strong>
+                        {member.userId}
+                      </strong>
+                    </div>
+                  </div>
+
+                  <div className="member-orbit">
+                    <div className="member-orbit-track" />
+                    <div className="member-orbit-dot" />
+                  </div>
+                </article>
+              )
+            )}
           </div>
         )}
       </section>
 
-      {/* =========================
-          ALSÓ GRID
-      ========================= */}
-
-      <section className="allomany-grid-section">
-        <div className="allomany-large-grid" />
-
-        <div className="allomany-large-orbit allomany-orbit-left">
-          <div className="allomany-large-orbit-track" />
-          <div className="allomany-large-orbit-dot" />
-        </div>
-
-        <div className="allomany-large-orbit allomany-orbit-right">
-          <div className="allomany-large-orbit-track" />
-          <div className="allomany-large-orbit-dot" />
-        </div>
-
-        <div className="allomany-grid-content">
-          <div className="section-label">
-            SZEMÉLYI ÁLLOMÁNY
-          </div>
-
-          <h2>
-            Együtt.
-            <br />
-            Felkészülten.
-          </h2>
-
-          <p>
-            A Kiképzési Parancsnokság személyi állománya
-            közösen dolgozik a kiképzési feladatok
-            végrehajtásán és a Honvédség felkészítésén.
-          </p>
-        </div>
-      </section>
-
-      {/* =========================
-          FOOTER
-      ========================= */}
-
+      {/* FOOTER */}
       <footer>
         <strong>
-          MAGYAR HONVÉDSÉG
+          KIKÉPZÉSI PARANCSNOKSÁG
         </strong>
 
         <span>
-          Kiképzési Parancsnokság
+          Információs és állományi felület
         </span>
       </footer>
     </main>
